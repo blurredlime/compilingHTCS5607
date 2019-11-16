@@ -27,21 +27,32 @@
             });
         });
     </script>
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/add.css">
 </head>
 <body>
-<h1>Add Employer</h1>
-<form>
-    <p>Company Name: <input type = "text" placeholder = "CompanyName" id = "companyName"></p>
-    <p>Street Address: <input type = "text" placeholder = "StreetAddress" id = "streetAddress"></p>
-    <p>Suburb: <input type = "text" placeholder = "Suburb" id = "suburb"></p>
-    <p>City: <input type = "text" placeholder = "City" id = "city"></p>
-    <p>Email Address: <input type = "text" placeholder = "EmailAddress" id = "emailAddress"></p>
-    <p>Phone Number: <input type = "text" placeholder = "PhoneNumber" id = "phoneNumber"></p>
-    <p>Status: <select placeholder = "Status" id = "status">
+<?php
+include 'headerDiv.php';
+include 'subHeader.php';
+?>
+<div id = "inputBorder">
+    <div id = "inputWrapper">
+        <h1>Add Employer</h1>
+
+        <form>
+            <p class = "vacancyP">Company Name: <input type = "text" placeholder = "CompanyName" id = "companyName"></p>
+            <p class = "vacancyP">Street Address: <input type = "text" placeholder = "StreetAddress" id = "streetAddress"></p>
+            <p class = "vacancyP">Suburb: <input type = "text" placeholder = "Suburb" id = "suburb"></p>
+            <p class = "vacancyP">City: <input type = "text" placeholder = "City" id = "city"></p>
+            <p class = "vacancyP">Email Address: <input type = "text" placeholder = "EmailAddress" id = "emailAddress"></p>
+            <p class = "vacancyP">Phone Number: <input type = "text" placeholder = "PhoneNumber" id = "phoneNumber"></p>
+            <p class = "vacancyP">Status: <select placeholder = "Status" id = "status">
                     <option value = "Active">Active</option>
                     <option value = "Inactive">Inactive</option>
                 </select></p>
-    <p><input id = "submitButton" type = "submit" value = "Add"></p>
-</form>
+            <p><input id = "submitButton" type = "submit" value = "Add"></p>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -29,12 +29,14 @@
     font-weight: bold;
     font-size: 30px;
 }
-
-#username {
+#nameWrap{
     display: inline-block;
     position: absolute;
-    left: 80%;
-    top: 5px;
+    left: 75%;
+    top: 10%;
+}
+#username {
+
     color: white;
     font-family: Calibri;
 }
