@@ -10,8 +10,11 @@ session_start()
             ?>
             <img id="TypeOfUserstoredImg" src="images/userdefault.png">
         </div>
+
         <div id="logout"><a href="api/logoutAPI.php">Logout<img id="logout" src="images/logout.png" href="api/logoutAPI.php"></a></div>
     </div>
+
 </div>
+
 
 

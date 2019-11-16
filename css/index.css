@@ -2,6 +2,31 @@
     margin: 0;
     padding: 0;
 }
+#loginDiv {
+    position: absolute;
+}
+
+#logoutNav{
+    position: absolute;
+    top: 130px;
+    left: 80px;
+    background-color: red;
+    color: white;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    z-index: 100;
+}
+#logoutNav:hover{
+    background-color: darkred;
+}
 
 #headerbanner h1{
     position: absolute;
@@ -35,6 +60,9 @@
     position: absolute;
     top: 40%;
     left: 38%;
+    height: 300px;
+    width: 30%;
+
     z-index: 1;
 }
 #contDiv {
@@ -70,7 +98,8 @@ body {
     margin: 4px 2px;
     position: absolute;
     left: 30%;
-    top: 150%;
+    top: 160%;
+    z-index: 100;
 
 }
 #loginSubmit:hover{
@@ -141,6 +170,7 @@ body {
     font-weight: bold;
     font-family: Calibri;
     transition: all 0.3s ease-in-out;
+    z-index: 2;
 }
 .help:hover {
     box-shadow: 1px 1px 5px #999;

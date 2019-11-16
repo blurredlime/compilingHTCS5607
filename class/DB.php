@@ -4,7 +4,7 @@
     class DB {
         var $conn;
         var $host = "localhost";
-        var $dbname = "looking glass";
+        var $dbname = "htcs5607";
         var $dbuser = "root";
         var $password = "";
 

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>My Page</title>
@@ -37,14 +39,15 @@
     </script>
     <script>
         $(document).ready(function(){
-$('p').click(function(){
-    alert('This is the log-in page, if you have forgotten your log-in credentials please talk to the IT Department.')
-});
+            $('p').click(function(){
+                alert('This is the log-in page, if you have forgotten your log-in credentials please talk to the IT Department.')
+            });
         });
     </script>
 
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/homenavigation.css">
+
 </head>
 <body>
 
@@ -53,9 +56,10 @@ $('p').click(function(){
     <div id = "headerbanner"><img src = "images/logo.png" id = "lgralogo">
         <h1>Looking Glass Recruitment Agency</h1>
     </div>
+
 </div>
 <div id = "indexbody">
-    <h1>Log-In</h1>
+    <h1 style="position: relative; left: -15%;">Log-In</h1>
 
     <div id = "loginDiv">Login</div>
 

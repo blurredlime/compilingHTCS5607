@@ -16,8 +16,17 @@ if (!isset($_SESSION["name"]) || is_null($_SESSION["name"])) {
 //    $rank = $_SESSION["rank"];
     if ($_SESSION["rank"] == "ITC"){
         include_once "navIT.html";
-                                        }
 
     }
+    if ($_SESSION["rank"] == "ELC"){
+        include_once "navEmp.html";
+
+    }
+    if ($_SESSION["rank"] == "CLC"){
+        include_once "navCan.html";
+
+    }
+
+}
 
 ?>
