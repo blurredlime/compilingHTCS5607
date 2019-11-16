@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Vacancy</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showVacancyAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(vacancy){
+                        appendVacancy = "<option value ='"+vacancy.vacancyID+"'>"+vacancy.vacancyID+" "+vacancy.description+"</option></p>";
+                        $("#vacancy").append(appendVacancy);
+                        $vacancyID = $(this).attr("vacancyID");
+                    });
+
+                    $("#vacancy").change(function () {
+                        $("#infoDiv").empty();
+                        vacancyIndex = $("#vacancy").prop('selectedIndex');
+                        console.log(vacancyIndex);
+                        vacancy = data[vacancyIndex];
+                        appendRow = "<h2>Vacancy Details:</h2>";
+                        appendRow += "<p>ID: "+vacancy.vacancyID+"</p>";
+                        appendRow += "<p>Description: <input value = '"+vacancy.description+"'></p>";
+                        appendRow += "<p>Notes: <input value = '"+vacancy.notes+"'></p>";
+                        appendRow += "<p> Status: <select placeholder = 'Status' id = 'status'>";
+                        appendRow += "<option value = 'Current'>Current</option>";
+                        appendRow += "<option value = 'Filled'>Filled</option>";
+                        appendRow += "</select></p>";
+                        appendRow += "<p>Salary: <input type = 'number' min = '20000' max = '200000' placeholder = 'Salary' id = 'salary' value = '"+vacancy.salary+"'></p>";
+                        appendRow += "<p><button updateID = '"+vacancy.vacancyID+"' class = 'updateButton'>Update</button></p>";
+                        $("#infoDiv").append(appendRow);
+
+
+                        $(".updateButton").click(function() {
+                            thisTR =  $(this).parent().parent();
+                            id1=$(this).attr("updateID");
+                            inputs= thisTR.find(":input");
+                            inputs.attr("class", "temp");
+                            infos = []
+                            $( ".temp" ).each(function( item ) {
+                                thisItem = $(this).val();
+                                infos.push(thisItem);
+                                $( this ).removeClass( "temp" );
+                            });
+                            description1 = infos[0];
+                            notes1 = infos[1];
+                            status1 = infos[2];
+                            salary1 = infos[3];
+                            console.log(description1);
+                            $.post("api/updateVacancyAPI.php", {description: description1, vacancyID: id1, notes: notes1, status: status1, salary: salary1})
+                                .done(function(data) {
+                                    alert(data);
+                                });
+                        });
+                    });
+
+
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+<p id = "selectVacancy">Select Vacancy: <select placeholder = "Vacancy" id = "vacancy">
+</select></p>
+<div id = "infoDiv">
+
+</div>
+
+</body>
+</html>

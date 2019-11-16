@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#headerbanner h1{
+    position: absolute;
+    top: 30px;
+    left: 28%;
+    color: white;
+    font-family: Calibri;
+    font-size: 40px;
+}
+#headerbanner {
+    z-index: 100;
+    width: 100%;
+    height: 100px;
+    background-color: dodgerblue;
+    box-shadow: 0px 0px 2px 1px gray;
+}
+#lgralogo {
+    width: 100px;
+    height: auto;
+    left: 0px;
+    right: 0px;
+}
+
+#indexbody h1, p{
+    color: black;
+    font-family: Calibri;
+    font-weight: bold;
+    text-align: center;
+}
+#indexbody {
+    position: absolute;
+    top: 40%;
+    left: 38%;
+    z-index: 1;
+}
+#contDiv {
+
+    position: absolute;
+    top: 60%;
+    left: 39%;
+    z-index: 2;
+
+}
+body {
+    background-color: white;
+
+}
+#username {
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+}
+
+#loginSubmit {
+
+    background-color: blue;
+    color: white;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    position: absolute;
+    left: 30%;
+    top: 150%;
+
+}
+#loginSubmit:hover{
+    background-color: dodgerblue;
+}
+.sidebanner {
+    position: absolute;
+
+    width: 100%;
+    height: 500px;
+    z-index: 0;
+}
+
+.bannerLcontainer {
+    position: absolute;
+    overflow:hidden;
+    width: 200px;
+    height: 500px;
+    top: 10%;
+    left: 5%;
+    border: 2px solid lightslategrey;
+    border-radius: 15px;
+
+
+}
+.bannerRcontainer {
+    position: absolute;
+    overflow:hidden;
+    width: 200px;
+    height: 500px;
+    top: 10%;
+    left: 80%;
+    border: 2px solid lightslategrey;
+    border-radius: 15px;
+}
+#bannerL {
+    position: absolute;
+}
+#bannerR {
+    position: absolute;
+}
+
+.nextPage {
+    font-family: Calibri;
+    text-decoration: none;
+    margin: 2px;
+    padding: 10px;
+    border: 2px solid dodgerblue;
+    border-radius: 5px;
+    outline: none;
+}
+.nextPage:hover {
+    background-color: dodgerblue;
+    color: white;
+}
+.help {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 75%;
+    color: white;
+    border: 4px solid dodgerblue;
+    color: dodgerblue;
+    border-radius: 50px;
+    left: 46%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Calibri;
+    transition: all 0.3s ease-in-out;
+}
+.help:hover {
+    box-shadow: 1px 1px 5px #999;
+    transform: scale(1.2,1.2);
+    cursor: pointer;
+}
+.help p{
+    color: dodgerblue;
+}
+

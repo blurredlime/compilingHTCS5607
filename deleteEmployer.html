@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Employer</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showDelEmployerAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(employer){
+                        appendRow = "<tr>";
+                        appendRow += "<td> " + employer.employerID + "</td>";
+                        appendRow += "<td> " + employer.companyName + "</td>";
+                        appendRow += "<td> " + employer.streetAddress + "</td>";
+                        appendRow += "<td> " + employer.suburb + "</td>";
+                        appendRow += "<td> " + employer.city + "</td>";
+                        appendRow += "<td> " + employer.emailAddress + "</td>";
+                        appendRow += "<td> " + employer.phoneNumber + "</td>";
+                        appendRow += "<td> " + employer.status + "</td>";
+                        appendRow += "<td> <button class = 'removeUser' removeID = '"+employer.employerID+"'>Delete" +
+                            "</button></td>";
+                        appendRow += "</tr>";
+                        $("#infoTable").append(appendRow);
+                    });
+
+
+                    $(".removeUser").click(function() {
+                        removeID = $(this).attr("removeID");
+                        removeParent = $(this).parent();
+                        console.log(removeParent);
+                        removeURL = "api/removeEmployerAPI.php?employerID="+removeID;
+                        console.log(removeURL);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                    });
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<table id = "infoTable" border = "solid">
+    <tr>
+        <th>ID</th>
+        <th>Company Name</th>
+        <th>Street Address</th>
+        <th>Suburb</th>
+        <th>City</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+    </tr>
+</table>
+
+</body>
+</html>

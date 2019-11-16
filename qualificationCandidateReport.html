@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Qualification Candidate Report</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#produceReport").click(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/showQualificationAPI.php', // 'http://172.11.11.11/HTCS5607/api/showUsersAPI.php'
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                        data.forEach(function (qualification) {
+                            appendRow = "<h2>Qualification Details:</h2>";
+                            appendRow += "<p>ID: " + qualification.qualificationID + "</p>";
+                            appendRow += "<p>Name: " + qualification.name + "</p>";
+                            appendRow += "<p>Level: " + qualification.level + "</p>";
+                            $("#infoDiv").append(appendRow);
+
+                            /////candidate
+                            $.ajax({
+                                type: 'GET',
+                                async: false,
+                                url: 'api/qualificationCandidateAPI.php?qualificationID=' + qualification.qualificationID,
+                                dataType: "JSON",
+                                success: function (data) {
+                                    url = 'api/candidateQualificationAPI.php?qualificationID=' + qualification.qualificationID;
+                                    //console.log(url);
+                                    console.log(data);
+                                    data.forEach(function (candidate) {
+                                        appendCandidate = "<h4>Candidate Details:</h4>";
+                                        appendCandidate += "<p>ID: "+candidate.candidateID+"</p>";
+                                        appendCandidate += "<p>First Name: "+candidate.firstName+"</p>";
+                                        appendCandidate += "<p>Last Name: "+candidate.lastName+"</p>";
+                                        appendCandidate += "<p>Date Obtained: "+candidate.dateObtained+"</p>";
+                                        appendCandidate += "<p>Institute Name: "+candidate.instituteName+"</p>";
+                                        $("#infoDiv").append(appendCandidate);
+                                    });
+                                    //console.log("employer done");
+                                },
+                                error: function () {
+                                    console.log('Error: ' + data);
+                                }
+                            });
+
+                            //////
+                        });
+                    },
+                    error: function () {
+                        console.log('Error: ' + data);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<p> <button id = "produceReport">Produce Report</button></p>
+<div id = "infoDiv">
+
+</div>
+
+</body>
+</html>

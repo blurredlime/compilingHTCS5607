@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function() {
+                firstName1 = $("#firstName").val();
+                lastName1 = $("#lastName").val();
+                streetAddress1 = $("#streetAddress").val();
+                suburb1 = $("#suburb").val();
+                city1 = $("#city").val();
+                emailAddress1 = $("#emailAddress").val();
+                phoneNumber1 = $("#phoneNumber").val();
+                workType1 = $("#workType").val();
+                status1 = $("#status").val();
+                username1 = $("#username").val();
+                password1 = $("#password").val();
+                $.post("api/addUserAPI.php", {firstName: firstName1, lastName: lastName1, streetAddress: streetAddress1, suburb: suburb1, city: city1, emailAddress: emailAddress1, phoneNumber: phoneNumber1, workType: workType1, status: status1, username: username1, password: password1})
+                    .done(function(data) {
+                        console.log(data);
+                    });
+                $("#firstName").val("");
+                $("#lastName").val("");
+                $("#streetAddress").val("");
+                $("#suburb").val("");
+                $("#city").val("");
+                $("#emailAddress").val("");
+                $("#phoneNumber").val("");
+                $("#workType").val("");
+                $("#status").val("");
+                $("#username").val("");
+                $("#password").val("");
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Register</h1>
+    <form>
+        <p>First Name: <input type = "text" placeholder = "FirstName" id = "firstName"></p>
+        <p>Last Name: <input type = "text" placeholder = "LastName" id = "lastName"></p>
+        <p>Street Address: <input type = "text" placeholder = "StreetAddress" id = "streetAddress"></p>
+        <p>Suburb: <input type = "text" placeholder = "Suburb" id = "suburb"></p>
+        <p>City: <input type = "text" placeholder = "City" id = "city"></p>
+        <p>Email Address: <input type = "text" placeholder = "EmailAddress" id = "emailAddress"></p>
+        <p>Phone Number: <input type = "number" placeholder = "PhoneNumber" id = "phoneNumber"></p>
+        <p>Work Type: <select placeholder = "WorkType" id = "workType">
+            <option value = "Full Time">Full Time</option>
+            <option value = "Part Time">Part Time</option>
+        </select></p>
+        <p>Status: <select placeholder = "Status" id = "status">
+            <option value = "Available">Available</option>
+            <option value = "Unavailable">Unavailable</option>
+        </select></p>
+        <p>Username: <input type = "text" placeholder = "Username" id = "username"></p>
+        <p>Password: <input type = "text" placeholder = "Password" id = "password"></p>
+
+        <p><input id = "submitButton" type = "submit" value = "Register"></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Vacancy</title> <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showEmployersAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(employer){
+                        appendEmployer = "<option value ='"+employer.employerID+"'>"+employer.employerID+" "+employer.companyName+"</option></p>";
+                        $("#employer").append(appendEmployer);
+                        $employerID = $(this).attr("employerID");
+                    });
+
+                    ////////qualification
+                    $.ajax({
+                        type: 'GET',
+                        url: 'api/showQualificationAPI.php',
+                        dataType: "JSON",
+                        success: function (data){
+                            console.log(data);
+                            data.forEach(function(qualification){
+                                appendQualification = "<option value ='"+qualification.qualificationID+"'>"+qualification.qualificationID+" "+qualification.name+"</option></p>";
+                                $("#qualification").append(appendQualification);
+                                $qualificationID = $(this).attr("qualificationID");
+
+                                $("#submitButton").click(function() {
+                                    description1 = $("#description").val();
+                                    notes1 = $("#notes").val();
+                                    status1 = $("#status").val();
+                                    salary1 = $("#salary").val();
+                                    console.log("hello");
+                                    employer1 = employer.employerID;
+                                    qualification1 = qualification.qualificationID;
+                                    $.post("api/addVacancyAPI.php", {description: description1, notes: notes1,status: status1, salary: salary1, employerID: employer1, qualificationID: qualification1})
+                                        .done(function(data) {
+                                            console.log(data);
+                                        });
+                                    $("#description").val("");
+                                    $("#notes").val("");
+                                    $("#status").val("");
+                                    $("#salary").val("");
+                                    $("employerID").val("");
+                                    $("qualificationID").val("");
+                                });
+                            });
+                        },
+                        error: function(){
+                            console.log('Error: ' + data);
+                        }
+                    });
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Add Vacancy</h1>
+<form>
+    <p>Description: <input type = "text" placeholder = "Description" id = "description"></p>
+    <p>Notes: <input type = "text" placeholder = "Notes" id = "notes"></p>
+    <p>Status: <select placeholder = "Status" id = "status">
+        <option value = "Current">Current</option>
+        <option value = "Filled">Filled</option>
+    </select></p>
+    <p>Salary: <input type = "number" min = "20000" max = "200000" placeholder = "Salary" id = "salary"></p>
+    <p id = "selectEmployer">Select Employer: <select placeholder = "Employer" id = "employer">
+    </select></p>
+    <p id = "selectQualification">Select Qualification: <select placeholder = "Qualification" id = "qualification">
+    </select></p>
+    <p><input id = "submitButton" type = "submit" value = "Add"></p>
+</form>
+</body>
+</html>

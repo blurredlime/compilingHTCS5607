@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Vacancy</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showDelVacancyAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(vacancy){
+                        appendRow = "<tr>";
+                        appendRow += "<td> " + vacancy.vacancyID + "</td>";
+                        appendRow += "<td> " + vacancy.description + "</td>";
+                        appendRow += "<td> " + vacancy.notes + "</td>";
+                        appendRow += "<td> " + vacancy.status + "</td>";
+                        appendRow += "<td> " + vacancy.salary + "</td>";
+                        appendRow += "<td> <button class = 'removeUser' removeID = '"+vacancy.vacancyID+"'>Delete</button></td>";
+                        appendRow += "</tr>";
+                        $("#infoTable").append(appendRow);
+                    });
+
+
+                    $(".removeUser").click(function() {
+                        removeID = $(this).attr("removeID");
+                        removeParent = $(this).parent();
+                        console.log(removeParent);
+                        removeURL1 = "api/removeVacancyAPI.php?vacancyID="+removeID;
+                        console.log(removeURL1);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL1,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                        removeURL2 = "api/removeVacancySkillAPI.php?vacancyID="+removeID;
+                        console.log(removeURL2);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL2,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                    });
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<table id = "infoTable" border = "solid">
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Notes</th>
+        <th>Status</th>
+        <th>Salary</th>
+    </tr>
+</table>
+
+</body>
+</html>

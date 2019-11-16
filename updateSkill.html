@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Skill</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showSkillsAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(skill){
+                        appendSkill = "<option value ='"+skill.skillID+"'>"+skill.skillID+" "+skill.name+"</option></p>";
+                        $("#skill").append(appendSkill);
+                        $skillID = $(this).attr("skillID");
+                    });
+
+                    $("#skill").change(function () {
+                        $("#infoDiv").empty();
+                        skillIndex = $("#skill").prop('selectedIndex');
+                        console.log(skillIndex);
+                        skill = data[skillIndex];
+                        appendRow = "<h2>Skill Details:</h2>";
+                        appendRow += "<p>ID: "+skill.skillID+"</p>";
+                        appendRow += "<p>Name: <input value = '" + skill.name + "'></p>";
+                        appendRow += "<p>Level: <input value = '" + skill.level + "'><p/>";
+                        appendRow += "<p> <button updateID = '"+skill.skillID+"' class = 'updateButton'>Update</button></p>";
+                        $("#infoDiv").append(appendRow);
+
+
+                        $(".updateButton").click(function() {
+                            thisTR =  $(this).parent().parent();
+                            id1=$(this).attr("updateID");
+                            inputs= thisTR.find(":input");
+                            inputs.attr("class", "temp");
+                            infos = []
+                            $( ".temp" ).each(function( item ) {
+                                thisItem = $(this).val();
+                                infos.push(thisItem);
+                                $( this ).removeClass( "temp" );
+                            });
+                            name1 = infos[0];
+                            level1 = infos[1];
+                            console.log(name1);
+                            // console.log(id1);
+                            $.post("api/updateSkillAPI.php", {name: name1, skillID: id1, level: level1})
+                                .done(function(data) {
+                                    alert(data);
+                                });
+                        });
+                    });
+
+
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+<p id = "selectSkill">Select Skill: <select placeholder = "Skill" id = "skill">
+</select></p>
+<div id = "infoDiv">
+
+</div>
+
+</body>
+</html>

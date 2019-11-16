@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+           $('#loginDiv').load("loginForm.php");
+            $('#contDiv').load("myDocument.php");
+        });
+    </script>
+</head>
+<body>
+        <div>Header</div>
+        <div>Navigation</div>
+        <div id = "loginDiv">Login</div>
+        <div id = "contDiv">Content</div>
+        <div>Footer</div>
+</html>

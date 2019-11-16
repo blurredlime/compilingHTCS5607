@@ -1,0 +1,145 @@
+#inputBorder{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    height: 75%;
+    width: 40%;
+
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px #999;
+
+}
+
+#inputWrapper {
+    position: absolute;
+    top: 5%;
+    left: 28%;
+    font-family: Calibri;
+    text-align: center;
+}
+#inputWrapper h3{
+
+    position: absolute;
+    top: -10%;
+}
+
+#submitButton {
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    background-color: limegreen;
+    color: white;
+    font-family: Calibri;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 12px;
+}
+
+#submitButton:hover{
+    cursor: pointer;
+    background-color: forestgreen;
+}
+/*-----This Section is for addSkill and addQualification-----*/
+#name {
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+}
+
+#level {
+    left: 4px;
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+
+}
+/*-----This Section is for addSkill and addQualification-----*/
+
+/*-----This Section is for addVacancy -----*/
+.vacancyP {
+    position: relative;
+    text-align: left;
+    left: -10%;
+}
+
+#description{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+
+}
+#notes{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 35px;
+}
+
+#status{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 32px
+}
+
+#salary{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 32px;
+}
+/*-----This Section is for addVacancy -----*/
+
+/*--addEmplyer.php section--*/
+
+#companyName{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+
+}
+#streetAddress{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 9px;
+}
+
+#suburb{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 58px
+}
+
+#city{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 80px;
+}
+
+#emailAddress{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 13px;
+}
+
+#phoneNumber{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 5px;
+}
+
+#status{
+    position: relative;
+    margin: 10px;
+    padding: 5px;
+    left: 32px;
+}

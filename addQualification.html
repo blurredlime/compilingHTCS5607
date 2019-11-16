@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Qualification</title> <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function() {
+                name1 = $("#name").val();
+                level1 = $("#level").val();
+                $.post("api/addQualificationAPI.php", {name: name1, level: level1})
+                    .done(function(data) {
+                        console.log(data);
+                    });
+                $("#name").val("");
+                $("#level").val("");
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Add Qualification</h1>
+<form>
+    <p>Name: <input type = "text" placeholder = "Name" id = "name"></p>
+    <p>Level: <input type = "text" placeholder = "Level" id = "level"></p>
+    <p><input id = "submitButton" type = "submit" value = "Add"></p>
+</form>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Candidate</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showDelCandidatesAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(candidate){
+                        appendRow = "<tr>";
+                        appendRow += "<td> " + candidate.candidateID + "</td>";
+                        appendRow += "<td> " + candidate.firstName + "</td>";
+                        appendRow += "<td> " + candidate.lastName + "</td>";
+                        appendRow += "<td> " + candidate.streetAddress + "</td>";
+                        appendRow += "<td> " + candidate.suburb + "</td>";
+                        appendRow += "<td> " + candidate.city + "</td>";
+                        appendRow += "<td> " + candidate.emailAddress + "</td>";
+                        appendRow += "<td> " + candidate.phoneNumber + "</td>";
+                        appendRow += "<td> " + candidate.status + "</td>";
+                        appendRow += "<td> <button class = 'removeUser' removeID = '"+candidate.candidateID+"'>Delete</button></td>";
+                        appendRow += "</tr>";
+                        $("#infoTable").append(appendRow);
+                    });
+
+
+                    $(".removeUser").click(function() {
+                        removeID = $(this).attr("removeID");
+                        removeParent = $(this).parent();
+                        console.log(removeParent);
+                        removeURL1 = "api/removeCandidateAPI.php?candidateID="+removeID;
+                        console.log(removeURL1);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL1,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                        removeURL2 = "api/removeCandidateQualAPI.php?candidateID="+removeID;
+                        console.log(removeURL2);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL2,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                        removeURL3 = "api/removeCandidateSkillAPI.php?candidateID="+removeID;
+                        console.log(removeURL3);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL3,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                    });
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<table id = "infoTable" border = "solid">
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Street Address</th>
+        <th>Suburb</th>
+        <th>City</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+        <th>Status</th>
+    </tr>
+</table>
+
+</body>
+</html>

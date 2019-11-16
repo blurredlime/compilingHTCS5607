@@ -1,0 +1,23 @@
+.navWrap {
+    position: absolute;
+    top: -150px;
+    left: -200px;
+    width: 700px;
+    height: 150px;
+    background-color: dodgerblue;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-family: Calibri;
+    border-radius: 10px;
+}
+#navText {
+    position: relative;
+    font-size: 30px;
+    top: 40%;
+}
+.navWrap:hover {
+    border: 2px solid blue;
+    font-size: 40px;
+    font-weight: bold;
+}

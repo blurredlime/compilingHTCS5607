@@ -1,0 +1,50 @@
+#infoWrapper {
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    top: 25%;
+    left: 10%;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px #999;
+
+}
+
+#selectWrapper {
+    position: absolute;
+    width: 80%;
+    height: auto;
+    border: 2px solid black; /** showing wrapper- to be removed **/
+    top: 18%;
+    left: 10%;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+/**--updateQualification.php section--**/
+#selectQualification {
+    position: relative;
+    float: right;
+    left: -10%;
+    margin: 5px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#qualification {
+    position: relative;
+    top: -5px;
+    float: right;
+    width: 100px;
+    margin: 4px;
+    padding: 5px;
+    border: none;
+    border-radius: 12px;
+    background-color: mediumpurple;
+
+}
+#qualification:hover{
+
+    border: 1px solid rebeccapurple;
+}

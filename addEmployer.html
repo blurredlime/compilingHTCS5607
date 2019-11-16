@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employer</title> <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function() {
+                companyName1 = $("#companyName").val();
+                streetAddress1 = $("#streetAddress").val();
+                suburb1 = $("#suburb").val();
+                city1 = $("#city").val();
+                emailAddress1 = $("#emailAddress").val();
+                phoneNumber1 = $("#phoneNumber").val();
+                status1 = $("#status").val();
+                $.post("api/addEmployerAPI.php", {companyName: companyName1, streetAddress: streetAddress1, suburb: suburb1, city: city1, emailAddress: emailAddress1, phoneNumber: phoneNumber1, status: status1})
+                    .done(function(data) {
+                        console.log(data);
+                    });
+                $("#companyName").val("");
+                $("#streetAddress").val("");
+                $("#suburb").val("");
+                $("#city").val("");
+                $("#emailAddress").val("");
+                $("#phoneNumber").val("");
+                $("#status").val("");
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Add Employer</h1>
+<form>
+    <p>Company Name: <input type = "text" placeholder = "CompanyName" id = "companyName"></p>
+    <p>Street Address: <input type = "text" placeholder = "StreetAddress" id = "streetAddress"></p>
+    <p>Suburb: <input type = "text" placeholder = "Suburb" id = "suburb"></p>
+    <p>City: <input type = "text" placeholder = "City" id = "city"></p>
+    <p>Email Address: <input type = "text" placeholder = "EmailAddress" id = "emailAddress"></p>
+    <p>Phone Number: <input type = "text" placeholder = "PhoneNumber" id = "phoneNumber"></p>
+    <p>Status: <select placeholder = "Status" id = "status">
+                    <option value = "Active">Active</option>
+                    <option value = "Inactive">Inactive</option>
+                </select></p>
+    <p><input id = "submitButton" type = "submit" value = "Add"></p>
+</form>
+</body>
+</html>

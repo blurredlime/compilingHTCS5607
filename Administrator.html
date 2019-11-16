@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        //changed
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showUsersAPI.php', // 'http://172.11.11.11/HTCS5607/api/showUsersAPI.php'
+                dataType: "JSON",
+                success: function (data){
+                   console.log(data);
+                   data.forEach(function(user){
+                       appendRow = "<tr>";
+                       appendRow += "<td>"+user.id+"</td>";
+                       appendRow += "<td><input value = '"+user.name+"'></td>";
+                       appendRow += "<td><input value = '"+user.email+"'></td>";
+                       appendRow += "<td><input value = '"+user.username+"'></td>";
+                       appendRow += "<td><input value = '"+user.password+"'> <button updateID = '"+user.id+"' class = 'updateButton'>Update</button></td>";
+                       appendRow += "<td class = 'removeUser' removeID = '"+user.id+"'>Remove</td>";
+                       appendRow += "</tr>";
+
+                       $("#infoTable").append(appendRow);
+                   });
+
+                   $(".updateButton").click(function() {
+                       thisTR =  $(this).parent().parent();
+                       id1=$(this).attr("updateID");
+                       inputs= thisTR.find(":input");
+                       //console.log(inputs);
+                       inputs.attr("class", "temp");
+                       infos = []
+                       $( ".temp" ).each(function( item ) {
+                           thisItem = $( this ).val()
+                           //console.log(thisItem);
+                           infos.push(thisItem);
+                           $( this ).removeClass( "temp" );
+                       });
+                       //console.log(infos);
+                       name1 = infos[0];
+                       email1 = infos[1];
+                       username1 = infos[2];
+                       password1 = infos[3];
+                       //something3 = infos[4];
+                       console.log(name1);
+
+
+
+                      // nameTD = $(this).parent().prev().prev().prev();
+                      // emailTD = $(this).parent().prev().prev();
+                      // usernameTD = $(this).parent().prev();
+                      // curr = $(this).prev();
+                      // id1= curr.attr("updateID");
+                      // name1 = nameTD.children().val();
+                      // email1 = emailTD.children().val();
+                      // username1 = usernameTD.children().val();
+                      // password1 = curr.val();
+                      // console.log(password1);
+                      // console.log(usernameTD.children().val());
+                      // console.log(emailTD.children().val());
+                      // console.log(nameTD.children().val());
+                      // console.log(id1);
+                      $.post("api/updateUserAPI.php", {name: name1, id: id1, email: email1, email: email1, username: username1, password: password1})
+                          .done(function(data) {
+                              alert(data);
+                          });
+                   });
+
+                    $(".removeUser").click(function() {
+                        removeID = $(this).attr("removeID");
+                        removeParent = $(this).parent();
+                        console.log(removeParent);
+                        removeURL = "api/removeUserAPI.php?userID="+removeID;
+                        console.log(removeURL);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                    });
+                },
+                error: function(){
+                   console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <table id = "infoTable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+    </table>
+
+</body>
+</html>

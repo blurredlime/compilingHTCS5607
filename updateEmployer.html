@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Employer</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showEmployersAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(employer){
+                        appendEmployer = "<option value ='"+employer.employerID+"'>"+employer.employerID+" "+employer.companyName+"</option></p>";
+                        $("#employer").append(appendEmployer);
+                        $employerID = $(this).attr("employerID");
+                    });
+
+                    $("#employer").change(function () {
+                        $("#infoDiv").empty();
+                        employerIndex = $("#employer").prop('selectedIndex');
+                        console.log(employerIndex);
+                        employer = data[employerIndex];
+                        appendRow = "<h2>Employer Details:</h2>";
+                        appendRow += "<p>ID: "+employer.employerID+"</p>";
+                        appendRow += "<p>Company Name: <input value = '" + employer.companyName + "'></p>";
+                        appendRow += "<p>StreetAddress: <input value = '" + employer.streetAddress + "'></p>";
+                        appendRow += "<p>Suburb: <input value = '" + employer.suburb + "'></p>";
+                        appendRow += "<p>City: <input value = '" + employer.city + "'></p>";
+                        appendRow += "<p>Email Address: <input value = '" + employer.emailAddress + "'></p>";
+                        appendRow += "<p>Phone Number: <input value = '" + employer.phoneNumber + "'></p>";
+                        appendRow += "<p>Status: <select placeholder = 'Status' id = 'status'>";
+                        appendRow += "<option value = 'Active'>Active</option>";
+                        appendRow += "<option value = 'Inactive'>Inactive</option></select></p>";
+                        appendRow += "<p> <button updateID = '"+employer.employerID+"' class = 'updateButton'>Update</button></p>";
+                        $("#infoDiv").append(appendRow);
+
+
+                        $(".updateButton").click(function() {
+                            thisTR =  $(this).parent().parent();
+                            id1=$(this).attr("updateID");
+                            inputs= thisTR.find(":input");
+                            inputs.attr("class", "temp");
+                            infos = []
+                            $( ".temp" ).each(function( item ) {
+                                thisItem = $(this).val();
+                                infos.push(thisItem);
+                                $( this ).removeClass( "temp" );
+                            });
+                            companyName1 = infos[0];
+                            streetAddress1 = infos[1];
+                            suburb1 = infos[2];
+                            city1 = infos[3];
+                            emailAddress1 = infos[4];
+                            phoneNumber1 = infos[5];
+                            status1 = infos [6];
+                            console.log(companyName1);
+                            $.post("api/updateEmployerAPI.php", {companyName: companyName1, employerID: id1, streetAddress: streetAddress1, suburb: suburb1, city: city1, emailAddress: emailAddress1, phoneNumber: phoneNumber1, status: status1})
+                                .done(function(data) {
+                                    alert(data);
+                                });
+                        });
+                    });
+
+
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+<p id = "selectEmployer">Select Employer: <select placeholder = "Employer" id = "employer">
+</select></p>
+<div id = "infoDiv">
+
+</div>
+
+</body>
+</html>

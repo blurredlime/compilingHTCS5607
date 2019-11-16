@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Vacancy Skill</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showVacancyAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(vacancy){
+                        appendVacancy = "<option value ='"+vacancy.vacancyID+"'>"+vacancy.vacancyID+" "+vacancy.description+"</option></p>";
+                        $("#vacancy").append(appendVacancy);
+                        $vacancyID = $(this).attr("vacancyID");
+                    });
+
+                    $("#vacancy").change(function () {
+                        $("#vacancyDiv").empty();
+                        vacancyIndex = $("#vacancy").prop('selectedIndex');
+                        console.log(vacancyIndex);
+                        vacancy = data[vacancyIndex];
+                        appendVacancyDetails = "<h2>Vacancy Details:</h2>";
+                        appendVacancyDetails += "<p>ID: "+vacancy.vacancyID+"</p>";
+                        appendVacancyDetails += "<p>Description: "+vacancy.description+"</p>";
+                        $("#vacancyDiv").append(appendVacancyDetails);
+                    });
+                    ////////skill
+                    $.ajax({
+                        type: 'GET',
+                        url: 'api/showSkillsAPI.php',
+                        dataType: "JSON",
+                        success: function (data){
+                            console.log(data);
+                            data.forEach(function(skill){
+                                appendSkill = "<option value ='"+skill.skillID+"'>"+skill.skillID+" "+skill.name+"</option></p>";
+                                $("#skill").append(appendSkill);
+                                $skillID = $(this).attr("skillID");
+                            });
+
+                            $("#skill").change(function () {
+                                $("#skillDiv").empty();
+                                skillIndex = $("#skill").prop('selectedIndex');
+                                console.log(skillIndex);
+                                skill = data[skillIndex];
+                                appendSkillDetails = "<h2>Skill Details:</h2>";
+                                appendSkillDetails += "<p>ID: "+skill.skillID+"</p>";
+                                appendSkillDetails += "<p>Name: " + skill.name + "</p>";
+                                appendSkillDetails += "<p>Years : <input type = 'text' placeholder = 'Years' id = 'years'></p>"
+                                appendSkillDetails += "<p><input id = 'submitButton' type = 'submit' value = 'Add'></p>";
+                                $("#skillDiv").append(appendSkillDetails);
+
+                                $("#submitButton").click(function() {
+                                    vacancyID1 = vacancy.vacancyID;
+                                    years1 = $("#years").val();
+                                    console.log(years1);
+                                    skillID1 = skill.skillID;
+                                    $.post("api/addVacancySkillAPI.php", {vacancyID: vacancyID1, years: years1, skillID: skillID1})
+                                        .done(function(data) {
+                                            console.log(data);
+                                        });
+                                    $("vacancyID").val("");
+                                    $("#years").val("");
+                                    $("skillID").val("");
+
+                                });
+                            });
+                        },
+                        error: function(){
+                            console.log('Error: ' + data);
+                        }
+                    });
+
+
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<p id = "selectVacancy">Select Vacancy: <select placeholder = "Vacancy" id = "vacancy">
+</select></p>
+<div id = "infoDiv">
+    <div id = "vacancyDiv">
+
+    </div>
+    <p id = "selectSkill">Select Skill: <select placeholder = "Skill" id = "skill">
+    </select></p>
+    <div id = "skillDiv">
+
+    </div>
+</div>
+
+</body>
+</html>

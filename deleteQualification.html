@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Qualification</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'api/showDelQualificationAPI.php',
+                dataType: "JSON",
+                success: function (data){
+                    console.log(data);
+                    data.forEach(function(qualification){
+                        appendRow = "<tr>";
+                        appendRow += "<td> " + qualification.qualificationID + "</td>";
+                        appendRow += "<td> " + qualification.name + "</td>";
+                        appendRow += "<td> " + qualification.level + "</td>";
+                        appendRow += "<td> <button class = 'removeUser' removeID = '"+qualification.qualificationID+"'>Delete</button></td>";
+                        appendRow += "</tr>";
+                        $("#infoTable").append(appendRow);
+                    });
+
+
+                    $(".removeUser").click(function() {
+                        removeID = $(this).attr("removeID");
+                        removeParent = $(this).parent();
+                        console.log(removeParent);
+                        removeURL = "api/removeQualificationAPI.php?qualificationID="+removeID;
+                        console.log(removeURL);
+                        $.ajax({
+                            type: 'GET',
+                            url: removeURL,
+                            dataType: "JSON",
+                            success: function (data){
+                                alert(data);
+                                console.log(data);
+                                removeParent.remove();
+                                location.reload();
+                            },
+                            error: function () {
+                                console.log("Error");
+                            }
+                        });
+                    });
+                },
+                error: function(){
+                    console.log('Error: ' + data);
+                }
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+<table id = "infoTable" border = "solid">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Level</th>
+    </tr>
+</table>
+
+</body>
+</html>
